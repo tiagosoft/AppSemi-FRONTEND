@@ -88,6 +88,17 @@ export class OrdersComponent implements OnInit {
       return;
     }
 
+    const today = new Date();
+    const attentionDate = new Date(this.attentionDate);
+
+    today.setHours(0, 0, 0, 0);
+    attentionDate.setHours(0, 0, 0, 0);
+
+    if (attentionDate > today) {
+      alert('La fecha de atención nopuede ser futura');
+      return;
+    }
+
     const orderRequest = {
       PatientName: this.selectedPatientName,
       AttentionDate: this.attentionDate,
