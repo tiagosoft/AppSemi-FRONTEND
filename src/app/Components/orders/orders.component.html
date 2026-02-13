@@ -1,0 +1,48 @@
+<form #form="ngForm" (ngSubmit)="createOrder()">
+  <div>
+    <label for="patient">Paciente: </label>
+    <select [(ngModel)]="selectedPatientName" name="patient">
+      <option [ngValue]="null">Seleccionar Paciente</option>
+      <option *ngFor="let patient of patientList" [value]="patient.fullName">
+        {{ patient.fullName }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <span>Fecha de atencion: </span>
+    <input type="date" [(ngModel)]="attentionDate" name="attentionDate" />
+  </div>
+  <div>
+    <span>Examenes: </span>
+    <label *ngFor="let exam of examList">
+      <input type="checkbox" (change)="checkBoxChange($event, exam)" />
+      {{ exam.name }}
+    </label>
+  </div>
+  <button>Submit</button>
+</form>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Nombre del paciente</th>
+        <th>Cantidad de examenes</th>
+        <th>Fecha de atencion</th>
+        <th>Creado en</th>
+        <th>Examenes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of ordersList">
+        <td>{{ order.orderId }}</td>
+        <td>{{ order.fullName }}</td>
+        <td>{{ order.examCount }}</td>
+        <td>{{ order.attentionDate }}</td>
+        <td>{{ order.createdAt }}</td>
+        <td>{{ order.exams }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
